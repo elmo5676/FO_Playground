@@ -38,16 +38,33 @@ public struct OpenUrlView: View {
         
     }
     
+    func openWSI() {
+        guard let wsi = AppUrl.wsi.urlScheme else { return }
+        UIApplication.shared.open(wsi)
+        
+    }
+    
+    func openOther(_ path: String) {
+        guard let path = AppUrl.other(path).urlScheme else { return }
+        UIApplication.shared.open(path)
+    }
+    
+    
+    @State var urlPath: String = ""
+    
     public var body: some View {
         VStack {
             Text("Open Jepp FD Pro")
+            TextField(text: $urlPath) {
+                Text("Input URL Path here")
+            }
             Button(
                 action: {
-                    openJeppFD()
+                    openOther(urlPath)
                 },
                 label: {
                     Label(
-                        title: { Text("Label") },
+                        title: { Text("OPEN PATH") },
                         icon: { Image(systemName: imageName).resizable().aspectRatio(contentMode: .fit).frame(width: imageSize, height: imageSize) }
                     )
                 })
