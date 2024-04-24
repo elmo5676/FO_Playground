@@ -27,9 +27,10 @@ public struct OpenUrlView: View {
     let imageName: String
     let imageSize: CGFloat
     
-    public init(imageName: String, imageSize: CGFloat) {
+    public init(imageName: String, imageSize: CGFloat, width: CGFloat) {
         self.imageName = imageName
         self.imageSize = imageSize
+        self.width = width
     }
     
     func openJeppFD() {
