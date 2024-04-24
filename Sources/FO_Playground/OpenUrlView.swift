@@ -31,6 +31,7 @@ public struct OpenUrlView: View {
         self.imageName = imageName
         self.imageSize = imageSize
         self.width = width
+        
     }
     
     func openJeppFD() {
