@@ -32,7 +32,7 @@ public enum AppUrl {
     var urlScheme: URL? {
         switch self {
         case .jeppFdPro: return URL(string: "flitedeckx.jeppesen://")
-        case .wsi: return URL(string: "wsi://")
+        case .wsi: return URL(string: "pilotbrief://")
         case .other(let urlPath): return URL(string: "\(urlPath)")
         }
     }

@@ -3,14 +3,13 @@ import SwiftUI
 
 public struct OpenUrlView: View {
     
-    let imageName: String
-    let imageSize: CGFloat
+    @State var urlPath: String = ""
+    @State var pasteBoard: String = ""
     
-    public init(imageName: String, imageSize: CGFloat, width: CGFloat) {
-        self.imageName = imageName
-        self.imageSize = imageSize
+    let width: CGFloat
+    
+    public init(width: CGFloat = 300) {
         self.width = width
-        
     }
     
     func openJeppFD() {
@@ -25,32 +24,27 @@ public struct OpenUrlView: View {
         
     }
     
-    func openOther(_ path: String) {
+    func openOtherAndCopyText(_ path: String, copy: String) {
+        UIPasteboard.general.string = copy
         guard let path = AppUrl.other(path).urlScheme else { return }
         UIApplication.shared.open(path)
     }
     
-    
-    @State var urlPath: String = ""
-    let width: CGFloat
+    var buttonLabel: some View {
+        Text("OPEN PATH and COPY TEXT")
+    }
     
     public var body: some View {
         VStack(alignment: .center) {
-                Text("Open Jepp FD Pro")
-            TextField(text: $urlPath) { Text("Input URL Path here") }.autocorrectionDisabled()
-                Button(
-                    action: {
-                        openOther(urlPath)
-                    },
-                    label: {
-                        Label(
-                            title: { Text("OPEN PATH") },
-                            icon: { Image(systemName: imageName).resizable().aspectRatio(contentMode: .fit).frame(width: imageSize, height: imageSize) }
-                        )
-                    })
+            TextField(text: $urlPath) { Text("Input URL Path here") }
+                .textFieldStyle(.roundedBorder)
+                .autocorrectionDisabled()
+            TextField(text: $pasteBoard) { Text("Copy this text to PasteBoard") }
+                .textFieldStyle(.roundedBorder)
+                .autocorrectionDisabled()
+            Button(action: { openOtherAndCopyText(urlPath, copy: pasteBoard) },
+                   label: { buttonLabel })
             }
         .frame(width: width)
-        
-        
     }
 }
