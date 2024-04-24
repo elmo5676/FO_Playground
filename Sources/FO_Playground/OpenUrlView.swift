@@ -51,24 +51,25 @@ public struct OpenUrlView: View {
     
     
     @State var urlPath: String = ""
+    let width: CGFloat
     
     public var body: some View {
-        VStack {
-            Text("Open Jepp FD Pro")
-            TextField(text: $urlPath) {
-                Text("Input URL Path here")
+        VStack(alignment: .center) {
+                Text("Open Jepp FD Pro")
+                TextField(text: $urlPath) { Text("Input URL Path here") }
+                Button(
+                    action: {
+                        openOther(urlPath)
+                    },
+                    label: {
+                        Label(
+                            title: { Text("OPEN PATH") },
+                            icon: { Image(systemName: imageName).resizable().aspectRatio(contentMode: .fit).frame(width: imageSize, height: imageSize) }
+                        )
+                    })
             }
-            Button(
-                action: {
-                    openOther(urlPath)
-                },
-                label: {
-                    Label(
-                        title: { Text("OPEN PATH") },
-                        icon: { Image(systemName: imageName).resizable().aspectRatio(contentMode: .fit).frame(width: imageSize, height: imageSize) }
-                    )
-                })
-        }
+        .frame(width: width)
+        
         
     }
 }
