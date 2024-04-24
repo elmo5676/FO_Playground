@@ -37,7 +37,7 @@ public struct OpenUrlView: View {
     public var body: some View {
         VStack(alignment: .center) {
                 Text("Open Jepp FD Pro")
-                TextField(text: $urlPath) { Text("Input URL Path here") }
+            TextField(text: $urlPath) { Text("Input URL Path here") }.autocorrectionDisabled()
                 Button(
                     action: {
                         openOther(urlPath)
